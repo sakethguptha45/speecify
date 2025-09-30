@@ -1,8 +1,9 @@
 import { JSONFilePreset } from "lowdb/node";
 import { nanoid } from "nanoid";
-import { ClientRepository } from "./client-repository.js";
-import { Client } from "./client.js";
-import { User } from "./user.js";
+import { ClientRepository } from "./client-service.js";
+import { Client } from "../models/client.js";
+import { User } from "../models/user.js";
+import { DatabaseService } from "./database-service.js";
 
 export class UserService {
   public async AddUser(

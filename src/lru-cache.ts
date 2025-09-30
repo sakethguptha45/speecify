@@ -13,7 +13,7 @@ type LRUCacheProviderOptions = {
   ttl: number; // Time to live in milliseconds
   itemLimit: number;
 };
-type LRUCacheProvider<T> = {
+export type LRUCacheProvider<T> = {
   has: (key: string) => boolean;
   get: (key: string) => T | undefined;
   set: (key: string, value: T) => void;

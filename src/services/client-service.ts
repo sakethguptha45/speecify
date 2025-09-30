@@ -1,6 +1,18 @@
 import { JSONFilePreset } from "lowdb/node";
-import { Client } from "./client.js";
+import { Client } from "../models/client.js";
+import { DatabaseService } from "./database-service.js";
+import { createLRUCacheProvider, LRUCacheProvider } from "../lru-cache.js";
+
 export class ClientRepository {
+  public databaseService: DatabaseService;
+  private cache : LRUCacheProvider<Client>;
+
+  private constructor(){
+    this.databaseService = DatabaseService.getInstance();
+    this.cache = createLRUCacheProvider({ ttl: 100000, itemLimit: 10 });
+  }
+
+  
   public async getById(id: string): Promise<Client | null> {
     const db = await JSONFilePreset("db.json", {
       clients: [],
